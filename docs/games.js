@@ -2,6 +2,7 @@ const games = [
   {
     title: 'VALORANT',
     page: 'valorant.html',
+    cover: 'valorant-cover.webp',
     genre: 'Tactical shooter',
     detail: 'VALORANT is a free-to-play 5v5 tactical shooter from Riot Games. Teams take turns attacking and defending. Attackers try to plant and detonate the Spike, while defenders try to stop the plant or defuse it. Each agent has unique abilities that help the team set up plays and control the map.',
     profile: {
@@ -153,7 +154,7 @@ function render() {
       art.textContent = 'VALORANT';
       info.append(renderProfile(profile));
     }
-    if (cover) {
+    if (cover && !isValorantPage) {
       const picture = new Image();
       picture.src = cover;
       picture.alt = '';
