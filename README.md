@@ -1,3 +1,3 @@
 # Aries Arcade
 
-[🎮 Visit Aries Arcade](https://aries-arcade-tvu04.thienvu123-2000.chatgpt.site)
+[🎮 Visit Aries Arcade](https://tvu04.github.io/aries.arcade/)
