@@ -1,6 +1,7 @@
 const games = [
   {
     title: 'VALORANT',
+    page: 'valorant.html',
     genre: 'Tactical shooter',
     detail: 'VALORANT is a free-to-play 5v5 tactical shooter from Riot Games. Teams take turns attacking and defending. Attackers try to plant and detonate the Spike, while defenders try to stop the plant or defuse it. Each agent has unique abilities that help the team set up plays and control the map.',
     profile: {
@@ -114,13 +115,14 @@ const games = [
 const catalog = document.querySelector('#catalog');
 const count = document.querySelector('#count');
 const search = document.querySelector('#search');
+const isValorantPage = Boolean(document.querySelector('#valorant-page'));
 
 function render() {
-  const query = search.value.trim().toLowerCase();
-  const matches = games.filter(({ title, genre }) =>
+  const query = (search?.value ?? '').trim().toLowerCase();
+  const matches = isValorantPage ? games.filter(game => game.page === 'valorant.html') : games.filter(({ title, genre }) =>
     (title + ' ' + genre).toLowerCase().replaceAll('.', '').includes(query.replaceAll('.', ''))
   );
-  count.textContent = matches.length + (matches.length === 1 ? ' GAME' : ' GAMES');
+  if (count) count.textContent = matches.length + (matches.length === 1 ? ' GAME' : ' GAMES');
   catalog.replaceChildren();
   if (!matches.length) {
     const message = document.createElement('p');
@@ -141,26 +143,28 @@ function render() {
     const category = document.createElement('p');
     category.className = 'genre';
     category.textContent = genre;
-    const heading = document.createElement('h3');
+    const heading = document.createElement(isValorantPage ? 'h2' : 'h3');
     heading.textContent = title;
     const note = document.createElement('p');
     note.textContent = detail;
     info.append(category, heading, note);
-    if (profile) {
+    if (profile && isValorantPage) {
       card.classList.add('game--valorant');
       art.textContent = 'VALORANT';
       info.append(renderProfile(profile));
     }
-    if (page) {
+    if (cover) {
       const picture = new Image();
       picture.src = cover;
       picture.alt = '';
       picture.style.cssText = 'display:block;width:100%;height:auto';
       art.replaceChildren(picture);
+    }
+    if (page && !isValorantPage) {
       const link = document.createElement('a');
       link.className = 'button';
       link.href = page;
-      link.textContent = 'View R.E.P.O. page ↗';
+      link.textContent = 'View ' + title + ' page ↗';
       info.append(link);
     }
     card.append(art, info);
@@ -259,8 +263,8 @@ function renderProfile({ ranks, stats, agents, maps }) {
 }
 
 const mapDialog = document.querySelector('#map-preview');
-const mapTitle = mapDialog.querySelector('h2');
-const mapImage = mapDialog.querySelector('img');
+const mapTitle = mapDialog?.querySelector('h2');
+const mapImage = mapDialog?.querySelector('img');
 
 function showMap(map) {
   mapTitle.textContent = map;
@@ -288,5 +292,5 @@ function showAgent({ name, detail, abilities }, role) {
   agentDialog.showModal();
 }
 
-search.addEventListener('input', render);
+search?.addEventListener('input', render);
 render();
