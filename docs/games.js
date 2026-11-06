@@ -102,6 +102,13 @@ const games = [
       maps: ['Ascent', 'Haven', 'Bind', 'Split'],
     },
   },
+  {
+    title: 'R.E.P.O.',
+    genre: 'Co-op horror',
+    detail: 'Team up, recover fragile valuables, and make it to extraction before the monsters catch you.',
+    cover: 'repo-cover.webp',
+    page: 'repo.html',
+  },
 ];
 
 const catalog = document.querySelector('#catalog');
@@ -110,7 +117,9 @@ const search = document.querySelector('#search');
 
 function render() {
   const query = search.value.trim().toLowerCase();
-  const matches = games.filter(({ title, genre }) => (title + ' ' + genre).toLowerCase().includes(query));
+  const matches = games.filter(({ title, genre }) =>
+    (title + ' ' + genre).toLowerCase().replaceAll('.', '').includes(query.replaceAll('.', ''))
+  );
   count.textContent = matches.length + (matches.length === 1 ? ' GAME' : ' GAMES');
   catalog.replaceChildren();
   if (!matches.length) {
@@ -120,7 +129,7 @@ function render() {
     catalog.append(message);
     return;
   }
-  for (const { title, genre, detail, profile } of matches) {
+  for (const { title, genre, detail, profile, cover, page } of matches) {
     const card = document.createElement('article');
     card.className = 'game';
     const art = document.createElement('div');
@@ -141,6 +150,18 @@ function render() {
       card.classList.add('game--valorant');
       art.textContent = 'VALORANT';
       info.append(renderProfile(profile));
+    }
+    if (page) {
+      const picture = new Image();
+      picture.src = cover;
+      picture.alt = '';
+      picture.style.cssText = 'display:block;width:100%;height:auto';
+      art.replaceChildren(picture);
+      const link = document.createElement('a');
+      link.className = 'button';
+      link.href = page;
+      link.textContent = 'View R.E.P.O. page ↗';
+      info.append(link);
     }
     card.append(art, info);
     catalog.append(card);
