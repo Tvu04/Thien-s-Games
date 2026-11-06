@@ -111,6 +111,13 @@ const games = [
     cover: 'repo-cover.webp',
     page: 'repo.html',
   },
+  {
+    title: 'Wizard101',
+    genre: 'Fantasy MMORPG',
+    detail: 'Build a spell deck, explore the Spiral, and duel enemies in turn-based battles.',
+    cover: 'wizard101-cover.webp',
+    page: 'wizard101.html',
+  },
 ];
 
 const catalog = document.querySelector('#catalog');
