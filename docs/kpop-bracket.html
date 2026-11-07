@@ -13,7 +13,14 @@
 <main class="shell collection-page">
   <p class="eyebrow"><span></span> ARIES ARCADE / MINI-GAME</p>
   <h1 class="collection-title">K-Pop Bias Bracket</h1>
-  <p>Eight songs. Seven picks. One winner.</p>
+  <p>Pick one song per matchup. It takes 31 picks to crown a winner.</p>
+  <div id="modes" hidden>
+    <label for="mode">Bracket mode</label>
+    <select id="mode">
+      <option value="curated">Curated 32</option>
+      <option value="shuffle">Shuffle 32</option>
+    </select>
+    <p>Curated 32 uses the selected lineup. Shuffle 32 draws 32 songs from a pool of 56. Changing modes starts a new bracket.</p></div>
   <p id="round" class="eyebrow" aria-live="polite"></p>
   <h2 id="prompt" tabindex="-1" aria-live="polite"></h2>
   <div id="choices" hidden>
@@ -31,10 +38,62 @@ const songs = [
   ["No Good", "XG"],
   ["Deserve", "BABYMONSTER"],
   ["Birthday Wish", "NMIXX"],
-  ["Bloody Paradise", "ENHYPEN"]
+  ["Bloody Paradise", "ENHYPEN"],
+  ["I CAN'T STOP ME","TWICE"],
+  ["Pretty Savage","BLACKPINK"],
+  ["I AM","IVE"],
+  ["Cheshire","ITZY"],
+  ["Super Shy","NewJeans"],
+  ["Drama","aespa"],
+  ["Psycho","Red Velvet"],
+  ["Dynamite","BTS"],
+  ["What is Love?","TWICE"],
+  ["The Feels","TWICE"],
+  ["Talk that Talk","TWICE"],
+  ["Kill This Love","BLACKPINK"],
+  ["Shut Down","BLACKPINK"],
+  ["After LIKE","IVE"],
+  ["ELEVEN","IVE"],
+  ["RINGO","ITZY"],
+  ["ETA","NewJeans"],
+  ["ZOOM ZOOM","aespa"],
+  ["Red Flavor","Red Velvet"],
+  ["Butter","BTS"],
+  ["FEVER","ENHYPEN"],
+  ["After School","Weeekly"],
+  ["Galileo","Kep1er"],
+  ["REVEAL","THE BOYZ"]
 ];
 
-const status = document.querySelector("#round");
+const songPool = [
+  ...songs,
+  ["Breakthrough","TWICE"],
+  ["Dance the Night Away","TWICE"],
+  ["CRY FOR ME","TWICE"],
+  ["MOONLIGHT SUNRISE","TWICE"],
+  ["Hare Hare","TWICE"],
+  ["Pink Venom","BLACKPINK"],
+  ["DDU-DU DDU-DU","BLACKPINK"],
+  ["You Never Know","BLACKPINK"],
+  ["Blue Blood","IVE"],
+  ["Lips","IVE"],
+  ["Snowy","ITZY"],
+  ["None of My Business","ITZY"],
+  ["Cool With You","NewJeans"],
+  ["ASAP","NewJeans"],
+  ["BAMBOLEO","Red Velvet"],
+  ["Russian Roulette","Red Velvet"],
+  ["Permission to Dance","BTS"],
+  ["Blessed-Cursed","ENHYPEN"],
+  ["Let Me In (20 CUBE)","ENHYPEN"],
+  ["On The Ground","ROSÉ"],
+  ["SOLO","JENNIE"],
+  ["TATTOO","AleXa"],
+  ["You Problem","MONSTA X"],
+  ["Psychic Lover","ITZY"]
+];
+const mode = document.querySelector("#mode");
+const roundLabel = document.querySelector("#round");
 const heading = document.querySelector("#prompt");
 const choices = [...document.querySelectorAll("#choices button")];
 const replay = document.querySelector("#replay");
@@ -43,15 +102,15 @@ let entrants, winners, match;
 function render() {
   if (entrants.length === 1) {
     const [title, artist] = entrants[0];
-    status.textContent = "BRACKET COMPLETE";
+    roundLabel.textContent = "BRACKET COMPLETE";
     heading.textContent = title + " by " + artist + " wins!";
     document.querySelector("#choices").hidden = true;
     replay.hidden = false;
     replay.focus();
     return;
   }
-  const round = {8: "Quarterfinal", 4: "Semifinal", 2: "Final"};
-  status.textContent = round[entrants.length] + " · Match " + (match + 1) + " of " + entrants.length / 2;
+  const round = {32: "Round of 32", 16: "Round of 16", 8: "Quarterfinal", 4: "Semifinal", 2: "Final"};
+  roundLabel.textContent = round[entrants.length] + " · Match " + (match + 1) + " of " + entrants.length / 2;
   choices.forEach((button, index) => {
     const [title, artist] = entrants[match * 2 + index];
     button.querySelector("strong").textContent = title;
@@ -60,11 +119,12 @@ function render() {
 }
 
 function start() {
-  entrants = [...songs];
+  entrants = [...(mode.value === "shuffle" ? songPool : songs)];
   for (let index = entrants.length - 1; index > 0; index--) {
     const other = Math.floor(Math.random() * (index + 1));
     [entrants[index], entrants[other]] = [entrants[other], entrants[index]];
   }
+  entrants = entrants.slice(0, songs.length);
   winners = [];
   match = 0;
   heading.textContent = "Which song are you keeping?";
@@ -90,5 +150,7 @@ replay.addEventListener("click", () => {
   start();
   heading.focus();
 });
+mode.addEventListener("change", () => start());
+document.querySelector("#modes").hidden = false;
 start();
 </script></body></html>
