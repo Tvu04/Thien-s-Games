@@ -55,11 +55,14 @@
 .kpop-section .song-favorites { max-width:none; grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr)); }
 .kpop-section .song-favorites figure { display:grid; grid-template-columns:minmax(4.5rem,7rem) minmax(0,1fr); align-items:center; }
 .kpop-section .song-favorites figcaption { overflow-wrap:anywhere; }
+.drama-hero h2 { display:flex; align-items:center; gap:.3em; }
+.section-icon { display:grid; place-items:center; flex:none; width:1.15em; height:1.15em; color:#dbc0ff; background:#2c2039; border:1px solid var(--line); border-radius:.28em; }
+.section-icon svg { width:66%; height:66%; }
 </style></head>
 <body><header class="shell top collections-top"><a class="brand" href="./"><img src="logo.svg" alt="" width="44" height="44"><span>ARIES<b>ARCADE</b></span></a><nav class="collections-nav" aria-label="Main navigation"><a href="game-library.html">Game Library</a><a href="k-pop-k-dramas.html" aria-current="page">K-Pop / K-Dramas</a><a href="songs-artists.html">Songs / Artists</a><a href="movies-tv.html">Movies / TV Shows</a></nav></header>
 <main class="shell collection-page"><p class="eyebrow"><span></span> COLLECTION / 02</p><h1 class="collection-title">K-Pop / K-Dramas</h1><p>My favorite K-pop groups and K-dramas.</p><section class="kpop-section" aria-labelledby="kpop-title">
 <header class="drama-hero kpop-hero">
-  <div><p class="eyebrow">ARIES ARCADE / MUSIC PICKS</p><h2 id="kpop-title">K-Pop</h2></div>
+  <div><p class="eyebrow">ARIES ARCADE / MUSIC PICKS</p><h2 id="kpop-title"><span class="section-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M9 18V5l12-2v13M9 9l12-2"/><ellipse cx="6" cy="18" rx="3" ry="2"/><ellipse cx="18" cy="16" rx="3" ry="2"/></svg></span>K-Pop</h2></div>
   <p><a class="button" href="kpop-bracket.html">Play the Bracket <span aria-hidden="true">↗</span></a></p>
 </header>
 <section class="favorites-section" aria-labelledby="groups-0">
@@ -92,7 +95,7 @@
 </section>
 </section>
 <section class="favorites-section drama-section" aria-labelledby="dramas-title">
-  <header class="drama-hero"><p class="eyebrow">ARIES ARCADE / SCREEN PICKS</p><h2 id="dramas-title">K-Dramas</h2></header>
+  <header class="drama-hero"><p class="eyebrow">ARIES ARCADE / SCREEN PICKS</p><h2 id="dramas-title"><span class="section-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" focusable="false"><rect x="2.5" y="5" width="19" height="13" rx="2"/><path d="m10 9 5 2.5-5 2.5zM8 21h8"/></svg></span>K-Dramas</h2></header>
   <section aria-labelledby="top-dramas">
     <h3 id="top-dramas">Top 5 K-Dramas</h3>
     <ol class="favorites-grid drama-posters">
