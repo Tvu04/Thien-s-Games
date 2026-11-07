@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Aries Arcade, a personal collection of games, music, and shows by Tvu04."><meta name="theme-color" content="#100e17"><link rel="icon" href="logo.svg" type="image/svg+xml"><title>Valorant Agent Roulette · Aries Arcade</title><link rel="stylesheet" href="style.css?v=single-nav-link"><link rel="stylesheet" href="collections.css?v=single-nav-link"><style>
+.roulette { max-width:44rem; padding:clamp(1rem,4vw,2rem); margin:1.5rem 0; border:1px solid var(--line); border-radius:1rem; background:radial-gradient(ellipse at top right,#52232d,transparent 65%),var(--panel); }
+.roulette label { display:block; margin-bottom:.4rem; font-weight:700; }
+.roulette select,.roulette button { font:inherit; padding:.65rem .85rem; border:1px solid #ff8996; border-radius:.45rem; }
+.roulette select { background:#211823; color:white; }
+.roulette button { background:#ff8996; color:#201219; font-weight:800; cursor:pointer; }
+.roulette button:disabled { opacity:.6; cursor:wait; }
+.roulette-controls { display:flex; flex-wrap:wrap; gap:.65rem; }
+#agent-result { display:flex; align-items:center; gap:1rem; margin-top:1rem; }
+#agent-result[hidden] { display:none; }
+#agent-result img { width:clamp(4rem,18vw,8rem); height:auto; }
+#agent-result h2,#agent-result p { margin:.2rem 0; }
+</style></head>
+<body><header class="shell top collections-top"><a class="brand" href="./"><img src="logo.svg" alt="" width="44" height="44"><span>ARIES<b>ARCADE</b></span></a><nav class="collections-nav" aria-label="Main navigation"><a href="game-library.html">Game Library</a><a href="k-pop-k-dramas.html">K-Pop / K-Dramas</a><a href="songs-artists.html">Songs / Artists</a><a href="movies-tv.html">Movies / TV Shows</a></nav></header>
+<main class="shell collection-page">
+  <p class="eyebrow"><span></span> ARIES ARCADE / MINI-GAME</p>
+  <h1 class="collection-title">Valorant Agent Roulette</h1>
+  <p>Choose a role or leave it on Any Role, then spin for your next agent.</p>
+  <section class="roulette" aria-label="Agent roulette">
+    <label for="agent-role">Role</label>
+    <div class="roulette-controls">
+      <select id="agent-role">
+        <option value="">Any Role</option>
+        <option>Controller</option><option>Duelist</option><option>Initiator</option><option>Sentinel</option>
+      </select>
+      <button id="spin" type="button">Spin</button>
+    </div>
+    <p id="roulette-status" role="status"></p>
+    <div id="agent-result" hidden>
+      <img alt="" width="128" height="128">
+      <div><h2></h2><p></p></div>
+    </div>
+    <noscript><p>Enable JavaScript to spin for an agent.</p></noscript>
+  </section>
+  <p><a href="game-library.html">← Back to Game Library</a></p>
+</main>
+<footer class="shell foot"><span>ARIES ARCADE</span><a href="https://github.com/Tvu04">TVU04 ON GITHUB ↗</a></footer>
+<script>
+const role = document.querySelector('#agent-role');
+const spin = document.querySelector('#spin');
+const statusLine = document.querySelector('#roulette-status');
+const result = document.querySelector('#agent-result');
+const portrait = result.querySelector('img');
+let roster;
+let previous;
+
+function pickAgent(agents, selectedRole, lastPick) {
+  const eligible = agents.filter(agent => !selectedRole || agent.role.displayName === selectedRole);
+  const pool = eligible.length > 1 ? eligible.filter(agent => agent.uuid !== lastPick) : eligible;
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+
+portrait.addEventListener('error', () => { portrait.hidden = true; });
+spin.addEventListener('click', async () => {
+  spin.disabled = true;
+  role.disabled = true;
+  try {
+    if (!roster) {
+      statusLine.textContent = 'Loading the agent roster…';
+      const response = await fetch('https://valorant-api.com/v1/agents?isPlayableCharacter=true', {signal: AbortSignal.timeout(10000)});
+      if (!response.ok) throw new Error('Roster unavailable');
+      const {data} = await response.json();
+      roster = data.filter(agent => agent.isPlayableCharacter && agent.role?.displayName && agent.displayName && agent.uuid);
+      if (!roster.length) {
+        roster = undefined;
+        throw new Error('Empty roster');
+      }
+    }
+    const agent = pickAgent(roster, role.value, previous);
+    if (!agent) {
+      result.hidden = true;
+      statusLine.textContent = 'No agents found for that role. Try another role.';
+      return;
+    }
+    previous = agent.uuid;
+    portrait.hidden = !agent.displayIcon;
+    if (agent.displayIcon) portrait.src = agent.displayIcon;
+    result.querySelector('h2').textContent = agent.displayName;
+    result.querySelector('p').textContent = agent.role.displayName;
+    result.hidden = false;
+    statusLine.textContent = 'You rolled ' + agent.displayName + ', ' + agent.role.displayName + '.';
+    spin.textContent = 'Spin Again';
+  } catch {
+    statusLine.textContent = 'The agent roster could not load. Press Spin to retry.';
+  } finally {
+    spin.disabled = false;
+    role.disabled = false;
+  }
+});
+</script>
+</body></html>
