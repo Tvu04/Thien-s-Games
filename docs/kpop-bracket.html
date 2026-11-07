@@ -25,7 +25,7 @@
       <option value="curated">Curated 32</option>
       <option value="shuffle">Shuffle 32</option>
     </select>
-    <p>Curated 32 uses the selected lineup. Shuffle 32 draws 32 songs from a pool of 56. Changing modes starts a new bracket.</p></div>
+    <p>Curated 32 uses the selected lineup. Shuffle 32 draws 32 tracks from the BELOVED K-POP playlist snapshot (1,036 unique tracks). Changing modes starts a new bracket.</p></div>
   <p id="round" class="eyebrow" aria-live="polite"></p>
   <h2 id="prompt" tabindex="-1" aria-live="polite"></h2>
   <div id="choices" hidden>
@@ -37,7 +37,7 @@
   <section id="preview-player" hidden aria-label="Song preview"></section>
   <button id="replay" class="button" type="button" hidden>Play Again</button>
   <noscript><p>Enable JavaScript to play the bracket.</p></noscript>
-</main><footer class="shell foot"><span>ARIES ARCADE</span><a href="https://github.com/Tvu04">TVU04 ON GITHUB ↗</a></footer><script>
+</main><footer class="shell foot"><span>ARIES ARCADE</span><a href="https://github.com/Tvu04">TVU04 ON GITHUB ↗</a></footer><script src="kpop-playlist.js"></script><script>
 const songs = [
   ["Strategy", "TWICE", "nmbiBVPe5bY"],
   ["Fancy", "TWICE", "kOHB85vDuow"],
@@ -73,33 +73,6 @@ const songs = [
   ["REVEAL","THE BOYZ", "HubfEY2rOqw"]
 ];
 
-const songPool = [
-  ...songs,
-  ["Breakthrough","TWICE", "9MwfOvKO744"],
-  ["Dance the Night Away","TWICE", "fW1Cgv63naI"],
-  ["CRY FOR ME","TWICE", "y0nVpR8DO7I"],
-  ["MOONLIGHT SUNRISE","TWICE", "ZcAUfa3RArg"],
-  ["Hare Hare","TWICE", "rLw2qhoLtfo"],
-  ["Pink Venom","BLACKPINK", "s1ClEKQYSYc"],
-  ["DDU-DU DDU-DU","BLACKPINK", "IPzouyj7FLA"],
-  ["You Never Know","BLACKPINK", "4Kk_iaaHd_Y"],
-  ["Blue Blood","IVE", "K-TzD1k5ygY"],
-  ["Lips","IVE", "7inO3vut90w"],
-  ["Snowy","ITZY", "y1fGC3LU3U4"],
-  ["None of My Business","ITZY", "keMO-mtekGI"],
-  ["Cool With You","NewJeans", "-jEmhjZr8RE"],
-  ["ASAP","NewJeans", "nFigEiB9P5c"],
-  ["BAMBOLEO","Red Velvet", "pnZXbDZEaK4"],
-  ["Russian Roulette","Red Velvet", "GlY7aMCm_Og"],
-  ["Permission to Dance","BTS", "FxEorUpwkmg"],
-  ["Blessed-Cursed","ENHYPEN", "2x6mVjX7sgc"],
-  ["Let Me In (20 CUBE)","ENHYPEN", "KU3XvCcXn08"],
-  ["On The Ground","ROSÉ", "EvLfnrHaDm0"],
-  ["SOLO","JENNIE", "4y8Hxkzkhjs"],
-  ["TATTOO","AleXa", "hLDuksz7_bI"],
-  ["You Problem","MONSTA X", "TbSKd7oDZds"],
-  ["Psychic Lover","ITZY", "WKNHe60epck"]
-];
 const mode = document.querySelector("#mode");
 const roundLabel = document.querySelector("#round");
 const heading = document.querySelector("#prompt");
@@ -159,7 +132,7 @@ function render() {
 }
 
 function start() {
-  entrants = [...(mode.value === "shuffle" ? songPool : songs)];
+  entrants = [...(mode.value === "shuffle" ? playlistTracks : songs)];
   for (let index = entrants.length - 1; index > 0; index--) {
     const other = Math.floor(Math.random() * (index + 1));
     [entrants[index], entrants[other]] = [entrants[other], entrants[index]];
