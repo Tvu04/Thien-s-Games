@@ -1,4 +1,44 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Aries Arcade, a personal collection of games, music, and shows by Tvu04."><meta name="theme-color" content="#100e17"><link rel="icon" href="logo.svg" type="image/svg+xml"><title>K-Pop / K-Dramas · Aries Arcade</title><link rel="stylesheet" href="style.css?v=single-nav-link"><link rel="stylesheet" href="collections.css?v=single-nav-link"></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Aries Arcade, a personal collection of games, music, and shows by Tvu04."><meta name="theme-color" content="#100e17"><link rel="icon" href="logo.svg" type="image/svg+xml"><title>K-Pop / K-Dramas · Aries Arcade</title><link rel="stylesheet" href="style.css?v=single-nav-link"><link rel="stylesheet" href="collections.css?v=single-nav-link"><style>
+.favorites-section { margin-top:2.5rem; }
+.favorites-section h2 { font-size:clamp(1.45rem, 3vw, 2rem); }
+.favorites-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap:1rem; list-style:none; padding:0; }
+.favorites-grid figure { margin:0; height:100%; border:1px solid var(--line); background:var(--panel); }
+.favorites-grid img { display:block; width:100%; aspect-ratio:4/3; object-fit:contain; background:var(--background); }
+.favorites-grid figcaption { padding:.75rem; font-weight:700; }
+.favorites-grid a:hover { color:var(--lime); }
+.rank { color:var(--lime); font:700 .8rem var(--mono); margin-right:.25rem; }
+.photo-source,.song-artist { display:block; color:var(--muted); font-size:.8rem; margin-top:.3rem; }
+.song-favorites { max-width:34rem; }
+.song-favorites img { aspect-ratio:1; }
+</style></head>
 <body><header class="shell top collections-top"><a class="brand" href="./"><img src="logo.svg" alt="" width="44" height="44"><span>ARIES<b>ARCADE</b></span></a><nav class="collections-nav" aria-label="Main navigation"><a href="game-library.html">Game Library</a><a href="k-pop-k-dramas.html" aria-current="page">K-Pop / K-Dramas</a><a href="songs-artists.html">Songs / Artists</a><a href="movies-tv.html">Movies / TV Shows</a></nav></header>
-<main class="shell collection-page"><p class="eyebrow"><span></span> COLLECTION / 02</p><h1 class="collection-title">K-Pop / K-Dramas</h1><p>My favorite K-pop groups and K-dramas.</p><p>Favorites coming soon.</p><p><a class="button" href="kpop-bracket.html">Play the Bracket <span aria-hidden="true">↗</span></a></p></main><footer class="shell foot"><span>ARIES ARCADE</span><a href="https://github.com/Tvu04">TVU04 ON GITHUB ↗</a></footer></body></html>
+<main class="shell collection-page"><p class="eyebrow"><span></span> COLLECTION / 02</p><h1 class="collection-title">K-Pop / K-Dramas</h1><p>My favorite K-pop groups and K-dramas.</p><p><a class="button" href="kpop-bracket.html">Play the Bracket <span aria-hidden="true">↗</span></a></p>
+<section class="favorites-section" aria-labelledby="groups-0">
+  <h2 id="groups-0">Top 5 Favorite K-Pop Girl Groups</h2>
+  <ol class="favorites-grid rankings">
+    <li><figure><img src="https://assets.teenvogue.com/photos/5f43dd238afd3d5bf0892c19/master/w_1600%2Cc_limit/twice5.jpg" alt="TWICE group photo" loading="lazy" decoding="async"><figcaption><span class="rank">#1</span> TWICE <a class="photo-source" href="https://www.teenvogue.com/story/twice-beauty-evolution" aria-label="TWICE photo source">Photo ↗</a></figcaption></figure></li>
+    <li><figure><img src="https://hermes.media.static.aol.com/media/2026/06/21/814c4b9a-420b-34f9-aa8c-ee24df5e75fa/2ae66afa-a549-475f-8005-45018ef18513.jpg" alt="XG group photo" loading="lazy" decoding="async"><figcaption><span class="rank">#2</span> XG <a class="photo-source" href="https://www.aol.com/articles/japanese-girl-band-xg-went-234104000.html" aria-label="XG photo source">Photo ↗</a></figcaption></figure></li>
+    <li><figure><img src="https://i0.wp.com/asiaon.com.br/wp-content/uploads/2022/04/FNjzHZ7VIAQW_as.jpg?resize=1536%2C1152&amp;ssl=1" alt="NMIXX group photo" loading="lazy" decoding="async"><figcaption><span class="rank">#3</span> NMIXX <a class="photo-source" href="https://asiaon.com.br/conheca-o-grupo-nmixx/" aria-label="NMIXX photo source">Photo ↗</a></figcaption></figure></li>
+    <li><figure><img src="https://cloudfront-us-east-2.images.arcpublishing.com/reuters/QWLERMFVKVLUVBL3AEY5S4TXHI.jpg" alt="NewJeans group photo" loading="lazy" decoding="async"><figcaption><span class="rank">#4</span> NewJeans <a class="photo-source" href="https://www.reuters.com/world/asia-pacific/newjeans-members-say-they-are-leaving-agency-after-dispute-2024-11-28/" aria-label="NewJeans photo source">Photo ↗</a></figcaption></figure></li>
+    <li><figure><img src="https://i.guim.co.uk/img/media/80a9bee24b3f73d876240e8acaaf265c1ecacbf1/238_70_4215_2530/master/4215.jpg?auto=format&amp;fit=crop&amp;height=900&amp;quality=85&amp;s=b5872906d102de69ef61c738caa6dfa0&amp;width=1200" alt="BLACKPINK group photo" loading="lazy" decoding="async"><figcaption><span class="rank">#5</span> BLACKPINK <a class="photo-source" href="https://www.theguardian.com/music/2022/sep/14/blackpink-k-pop-girl-group-born-pink-rule-music-world" aria-label="BLACKPINK photo source">Photo ↗</a></figcaption></figure></li>
+  </ol>
+</section>
+<section class="favorites-section" aria-labelledby="groups-1">
+  <h2 id="groups-1">Top 5 Favorite K-Pop Boy Groups</h2>
+  <ol class="favorites-grid rankings">
+    <li><figure><img src="https://6.soompi.io/wp-content/uploads/image/81a07369d85941beb3ec17d231960027.jpeg?e=t&amp;s=900x600" alt="TXT group photo" loading="lazy" decoding="async"><figcaption><span class="rank">#1</span> TXT <a class="photo-source" href="https://www.soompi.com/article/1471253wpp/txts-blue-hour-becomes-their-2nd-mv-to-surpass-100-million-views" aria-label="TXT photo source">Photo ↗</a></figcaption></figure></li>
+    <li><figure><img src="https://koreajoongangdaily.joins.com/data/photo/2026/03/25/60228139-f294-4941-8f6b-ea49f01f54b9.jpg" alt="Stray Kids group photo" loading="lazy" decoding="async"><figcaption><span class="rank">#2</span> Stray Kids <a class="photo-source" href="https://koreajoongangdaily.joins.com/news/2026-03-25/entertainment/kpop/Stray-Kids-marks-debut-anniversary-with-new-digital-single/2553172" aria-label="Stray Kids photo source">Photo ↗</a></figcaption></figure></li>
+    <li><figure><img src="https://articles.unesco.org/sites/default/files/2024-12/%C2%A9Pledis%20Entertainment.jpg" alt="SEVENTEEN group photo" loading="lazy" decoding="async"><figcaption><span class="rank">#3</span> SEVENTEEN <a class="photo-source" href="https://www.unesco.org/en/articles/discover-winners-unesco-x-seventeen-going-together-youth-creativity-and-well-being-grant-scheme" aria-label="SEVENTEEN photo source">Photo ↗</a></figcaption></figure></li>
+    <li><figure><img src="https://images.gutefrage.net/media/fragen/bilder/enhypen---members-merken/0_full.jpg?v=1651141344000" alt="ENHYPEN group photo" loading="lazy" decoding="async"><figcaption><span class="rank">#4</span> ENHYPEN <a class="photo-source" href="https://www.gutefrage.net/frage/enhypen---members-merken" aria-label="ENHYPEN photo source">Photo ↗</a></figcaption></figure></li>
+    <li><figure><img src="https://upload.wikimedia.org/wikipedia/commons/e/ed/BTS_at_the_White_House_on_May_31%2C_2022_06.jpg" alt="BTS group photo" loading="lazy" decoding="async"><figcaption><span class="rank">#5</span> BTS <a class="photo-source" href="https://commons.wikimedia.org/wiki/File%3ABTS_at_the_White_House_on_May_31%2C_2022_06.jpg" aria-label="BTS photo source">Photo ↗</a></figcaption></figure></li>
+  </ol>
+</section>
+<section class="favorites-section" aria-labelledby="current-songs">
+  <h2 id="current-songs">Current Favorite Songs</h2>
+  <ul class="favorites-grid song-favorites">
+    <li><figure><img src="https://cdn.enmixx.com/albums/strange-muse/cover.jpg" alt="Strange Muse EP cover by NMIXX" loading="lazy" decoding="async"><figcaption><a href="https://music.apple.com/us/album/birthday-wish/6812956002?i=6812956004"><span lang="ko">긴 소원</span> (Birthday Wish) ↗</a><span class="song-artist">NMIXX</span></figcaption></figure></li>
+    <li><figure><img src="https://m.imageimg.net/upload/artist_img/XGXXX/027b4a9735ffb4bfc9cf801b8fe75cf4144a57a8_6aa779f210432.jpg" alt="DEPENDS single artwork by XG" loading="lazy" decoding="async"><figcaption><a href="https://music.apple.com/us/album/depends-single/6820577553">DEPENDS ↗</a><span class="song-artist">XG</span></figcaption></figure></li>
+  </ul>
+</section>
+</main><footer class="shell foot"><span>ARIES ARCADE</span><a href="https://github.com/Tvu04">TVU04 ON GITHUB ↗</a></footer></body></html>
