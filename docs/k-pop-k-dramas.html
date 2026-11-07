@@ -24,6 +24,11 @@
 .release-info p { margin:0 0 .4rem; }
 .release-info a,.release-label { color:var(--lime); font-size:.8rem; }
 .group-card .photo-source { margin:0; padding:0 .75rem .75rem; }
+.drama-section { padding-top:2rem; border-top:1px solid var(--line); }
+.drama-posters img { aspect-ratio:2/3; }
+.current-drama { max-width:14rem; }
+.drama-list { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,14rem),1fr)); gap:.65rem; list-style:none; padding:0; }
+.drama-list li { padding:.75rem; border:1px solid var(--line); background:var(--panel); }
 </style></head>
 <body><header class="shell top collections-top"><a class="brand" href="./"><img src="logo.svg" alt="" width="44" height="44"><span>ARIES<b>ARCADE</b></span></a><nav class="collections-nav" aria-label="Main navigation"><a href="game-library.html">Game Library</a><a href="k-pop-k-dramas.html" aria-current="page">K-Pop / K-Dramas</a><a href="songs-artists.html">Songs / Artists</a><a href="movies-tv.html">Movies / TV Shows</a></nav></header>
 <main class="shell collection-page"><p class="eyebrow"><span></span> COLLECTION / 02</p><h1 class="collection-title">K-Pop / K-Dramas</h1><p>My favorite K-pop groups and K-dramas.</p><p><a class="button" href="kpop-bracket.html">Play the Bracket <span aria-hidden="true">↗</span></a></p>
@@ -54,5 +59,50 @@
     <li><figure><img src="https://cdn.enmixx.com/albums/strange-muse/cover.jpg" alt="Strange Muse EP cover by NMIXX" loading="lazy" decoding="async"><figcaption><a href="https://music.apple.com/us/album/birthday-wish/6812956002?i=6812956004"><span lang="ko">긴 소원</span> (Birthday Wish) ↗</a><span class="song-artist">NMIXX</span></figcaption></figure></li>
     <li><figure><img src="https://m.imageimg.net/upload/artist_img/XGXXX/027b4a9735ffb4bfc9cf801b8fe75cf4144a57a8_6aa779f210432.jpg" alt="DEPENDS single artwork by XG" loading="lazy" decoding="async"><figcaption><a href="https://music.apple.com/us/album/depends-single/6820577553">DEPENDS ↗</a><span class="song-artist">XG</span></figcaption></figure></li>
   </ul>
+</section>
+<section class="favorites-section drama-section" aria-labelledby="dramas-title">
+  <h2 id="dramas-title">K-Dramas</h2>
+  <section aria-labelledby="top-dramas">
+    <h3 id="top-dramas">Top 5 K-Dramas</h3>
+    <ol class="favorites-grid drama-posters">
+      <li><figure><img src="https://a.ksd-i.com/a/2022-03-04/140172-935880.jpeg" alt="Business Proposal poster" loading="lazy" decoding="async"><figcaption><span class="rank">#1</span> Business Proposal<span class="song-artist">10/10</span></figcaption></figure></li>
+      <li><figure><img src="https://image.kpopmap.com/2020/07/jtbc-strong-woman-dobongsoon-poster.jpg" alt="Strong Girl Bong-soon poster" loading="lazy" decoding="async"><figcaption><span class="rank">#2</span> Strong Girl Bong-soon<span class="song-artist">10/10</span></figcaption></figure></li>
+      <li><figure><img src="https://avatars.mds.yandex.net/get-kinopoisk-image/1900788/0efb0572-8f5a-45ef-87bb-d5309c7177d3/1920x" alt="True Beauty poster" loading="lazy" decoding="async"><figcaption><span class="rank">#3</span> True Beauty<span class="song-artist">10/10</span></figcaption></figure></li>
+      <li><figure><img src="https://celedrama.com/public/medies/Aug_2023/1691326013.64cf963dd738e.jpg" alt="King the Land poster" loading="lazy" decoding="async"><figcaption><span class="rank">#4</span> King the Land<span class="song-artist">10/10</span></figcaption></figure></li>
+      <li><figure><img src="https://www.elle.vn/app/uploads/2026/05/27/762043/Hinh-3-13.jpg" alt="Teach You a Lesson poster" loading="lazy" decoding="async"><figcaption><span class="rank">#5</span> Teach You a Lesson<span class="song-artist">10/10</span></figcaption></figure></li>
+    </ol>
+  </section>
+  <section class="favorites-section" aria-labelledby="watching-dramas">
+    <h3 id="watching-dramas">Currently Watching</h3>
+    <div class="favorites-grid drama-posters current-drama">
+      <figure><img src="https://cdn.dramalist.net/media/news-media/fnBxMYLUczbeIvYN9UFYN.jpg" alt="Take Charge of My Heart poster" loading="lazy" decoding="async"><figcaption>Take Charge of My Heart<span class="song-artist">Episode 1</span></figcaption></figure>
+    </div>
+  </section>
+  <section class="favorites-section" aria-labelledby="drama-watchlist">
+  <h3 id="drama-watchlist">Watchlist</h3>
+  <ul class="drama-list">
+    <li>Our Sticky Love</li>
+    <li>Doctor X: Mafia in White</li>
+    <li>The Remarried Empress</li>
+    <li>Final Table</li>
+    <li>Love in Disguise</li>
+    <li>Dive Into You</li>
+    <li>Our Unwritten Seoul</li>
+    <li>My Bias, My Boss</li>
+    <li>Filling for Love</li>
+  </ul>
+</section>
+  <section class="favorites-section" aria-labelledby="drama-mentions">
+  <h3 id="drama-mentions">Honorable Mentions</h3>
+  <ul class="drama-list">
+    <li>Perfect Crown</li>
+    <li>Lovely Runner</li>
+    <li>When Life Gives You Tangerines</li>
+    <li>My Demon</li>
+    <li>Good Boy</li>
+    <li>When the Phone Rings</li>
+    <li>My Royal Nemesis</li>
+  </ul>
+</section>
 </section>
 </main><footer class="shell foot"><span>ARIES ARCADE</span><a href="https://github.com/Tvu04">TVU04 ON GITHUB ↗</a></footer></body></html>
