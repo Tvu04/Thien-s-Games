@@ -6,6 +6,11 @@
 #choices strong,#choices span { display:block; }
 #choices strong { font-size:1.35rem; }
 #choices span { color:var(--purple); margin-top:.4rem; }
+#choices .pick { width:100%; }
+#choices .pick[aria-pressed="true"] { border-color:var(--lime); }
+#choices .preview { min-height:0; padding:.55rem; margin:.4rem 0; }
+#choices article a { color:var(--purple); font-size:.8rem; }
+#preview-player iframe { display:block; width:min(100%, 420px); height:236px; margin-top:1rem; border:0; }
 #replay { border:0; cursor:pointer; }
 #replay[hidden] { display:none; }
 </style></head>
@@ -13,7 +18,7 @@
 <main class="shell collection-page">
   <p class="eyebrow"><span></span> ARIES ARCADE / MINI-GAME</p>
   <h1 class="collection-title">K-Pop Bias Bracket</h1>
-  <p>Pick one song per matchup. It takes 31 picks to crown a winner.</p>
+  <p>Pick two songs to advance from each group of four, then pick one winner in the final.</p>
   <div id="modes" hidden>
     <label for="mode">Bracket mode</label>
     <select id="mode">
@@ -24,82 +29,106 @@
   <p id="round" class="eyebrow" aria-live="polite"></p>
   <h2 id="prompt" tabindex="-1" aria-live="polite"></h2>
   <div id="choices" hidden>
-    <button type="button"><strong></strong><span></span></button>
-    <button type="button"><strong></strong><span></span></button>
+    <article><button type="button" class="pick" aria-pressed="false"><strong></strong><span></span></button><button type="button" class="preview">Play 10-sec preview</button> <a target="_blank" rel="noopener">Open on YouTube Music ↗</a></article>
+    <article><button type="button" class="pick" aria-pressed="false"><strong></strong><span></span></button><button type="button" class="preview">Play 10-sec preview</button> <a target="_blank" rel="noopener">Open on YouTube Music ↗</a></article>
+    <article><button type="button" class="pick" aria-pressed="false"><strong></strong><span></span></button><button type="button" class="preview">Play 10-sec preview</button> <a target="_blank" rel="noopener">Open on YouTube Music ↗</a></article>
+    <article><button type="button" class="pick" aria-pressed="false"><strong></strong><span></span></button><button type="button" class="preview">Play 10-sec preview</button> <a target="_blank" rel="noopener">Open on YouTube Music ↗</a></article>
   </div>
+  <section id="preview-player" hidden aria-label="Song preview"></section>
   <button id="replay" class="button" type="button" hidden>Play Again</button>
   <noscript><p>Enable JavaScript to play the bracket.</p></noscript>
 </main><footer class="shell foot"><span>ARIES ARCADE</span><a href="https://github.com/Tvu04">TVU04 ON GITHUB ↗</a></footer><script>
 const songs = [
-  ["Strategy", "TWICE"],
-  ["Fancy", "TWICE"],
-  ["Sugar Rush Ride", "TXT"],
-  ["Is This Love", "XG"],
-  ["No Good", "XG"],
-  ["Deserve", "BABYMONSTER"],
-  ["Birthday Wish", "NMIXX"],
-  ["Bloody Paradise", "ENHYPEN"],
-  ["I CAN'T STOP ME","TWICE"],
-  ["Pretty Savage","BLACKPINK"],
-  ["I AM","IVE"],
-  ["Cheshire","ITZY"],
-  ["Super Shy","NewJeans"],
-  ["Drama","aespa"],
-  ["Psycho","Red Velvet"],
-  ["Dynamite","BTS"],
-  ["What is Love?","TWICE"],
-  ["The Feels","TWICE"],
-  ["Talk that Talk","TWICE"],
-  ["Kill This Love","BLACKPINK"],
-  ["Shut Down","BLACKPINK"],
-  ["After LIKE","IVE"],
-  ["ELEVEN","IVE"],
-  ["RINGO","ITZY"],
-  ["ETA","NewJeans"],
-  ["ZOOM ZOOM","aespa"],
-  ["Red Flavor","Red Velvet"],
-  ["Butter","BTS"],
-  ["FEVER","ENHYPEN"],
-  ["After School","Weeekly"],
-  ["Galileo","Kep1er"],
-  ["REVEAL","THE BOYZ"]
+  ["Strategy", "TWICE", "nmbiBVPe5bY"],
+  ["Fancy", "TWICE", "kOHB85vDuow"],
+  ["Sugar Rush Ride", "TXT", "P9tKTxbgdkk"],
+  ["Is This Love", "XG", "aHTI0SXGVS0"],
+  ["No Good", "XG", "--rTmGtUFhI"],
+  ["Deserve", "BABYMONSTER", null],
+  ["Birthday Wish", "NMIXX", null],
+  ["Bloody Paradise", "ENHYPEN", "YJhEsDa2o8w"],
+  ["I CAN'T STOP ME","TWICE", "3d-D5bLDZSk"],
+  ["Pretty Savage","BLACKPINK", "F8c8f2nK82w"],
+  ["I AM","IVE", "a0LmdjshiAQ"],
+  ["Cheshire","ITZY", "izOGip7r6Zg"],
+  ["Super Shy","NewJeans", "n7ePZLn9_lQ"],
+  ["Drama","aespa", "S3Z6N7U7f6I"],
+  ["Psycho","Red Velvet", "PyyT5tHbOLw"],
+  ["Dynamite","BTS", "HaEYUJ2aRHs"],
+  ["What is Love?","TWICE", "w4nihuYVTW0"],
+  ["The Feels","TWICE", "TsHl3pNRIUo"],
+  ["Talk that Talk","TWICE", "F2Y0Q9blUPk"],
+  ["Kill This Love","BLACKPINK", "z7e54L8usac"],
+  ["Shut Down","BLACKPINK", "UZPZyd5vE1c"],
+  ["After LIKE","IVE", "g92HIac9ufA"],
+  ["ELEVEN","IVE", "0EK_M2taRIM"],
+  ["RINGO","ITZY", "H0SHNEcqqR0"],
+  ["ETA","NewJeans", "XCkpalH6Ppk"],
+  ["ZOOM ZOOM","aespa", "YSEwEFuMPPM"],
+  ["Red Flavor","Red Velvet", "BLavT7w4R9I"],
+  ["Butter","BTS", "NNCBq0JHXsU"],
+  ["FEVER","ENHYPEN", "toUmJm5G37w"],
+  ["After School","Weeekly", "psoyfapc_nc"],
+  ["Galileo","Kep1er", "CcdFlI3pJ1Y"],
+  ["REVEAL","THE BOYZ", "HubfEY2rOqw"]
 ];
 
 const songPool = [
   ...songs,
-  ["Breakthrough","TWICE"],
-  ["Dance the Night Away","TWICE"],
-  ["CRY FOR ME","TWICE"],
-  ["MOONLIGHT SUNRISE","TWICE"],
-  ["Hare Hare","TWICE"],
-  ["Pink Venom","BLACKPINK"],
-  ["DDU-DU DDU-DU","BLACKPINK"],
-  ["You Never Know","BLACKPINK"],
-  ["Blue Blood","IVE"],
-  ["Lips","IVE"],
-  ["Snowy","ITZY"],
-  ["None of My Business","ITZY"],
-  ["Cool With You","NewJeans"],
-  ["ASAP","NewJeans"],
-  ["BAMBOLEO","Red Velvet"],
-  ["Russian Roulette","Red Velvet"],
-  ["Permission to Dance","BTS"],
-  ["Blessed-Cursed","ENHYPEN"],
-  ["Let Me In (20 CUBE)","ENHYPEN"],
-  ["On The Ground","ROSÉ"],
-  ["SOLO","JENNIE"],
-  ["TATTOO","AleXa"],
-  ["You Problem","MONSTA X"],
-  ["Psychic Lover","ITZY"]
+  ["Breakthrough","TWICE", "9MwfOvKO744"],
+  ["Dance the Night Away","TWICE", "fW1Cgv63naI"],
+  ["CRY FOR ME","TWICE", "y0nVpR8DO7I"],
+  ["MOONLIGHT SUNRISE","TWICE", "ZcAUfa3RArg"],
+  ["Hare Hare","TWICE", "rLw2qhoLtfo"],
+  ["Pink Venom","BLACKPINK", "s1ClEKQYSYc"],
+  ["DDU-DU DDU-DU","BLACKPINK", "IPzouyj7FLA"],
+  ["You Never Know","BLACKPINK", "4Kk_iaaHd_Y"],
+  ["Blue Blood","IVE", "K-TzD1k5ygY"],
+  ["Lips","IVE", "7inO3vut90w"],
+  ["Snowy","ITZY", "y1fGC3LU3U4"],
+  ["None of My Business","ITZY", "keMO-mtekGI"],
+  ["Cool With You","NewJeans", "-jEmhjZr8RE"],
+  ["ASAP","NewJeans", "nFigEiB9P5c"],
+  ["BAMBOLEO","Red Velvet", "pnZXbDZEaK4"],
+  ["Russian Roulette","Red Velvet", "GlY7aMCm_Og"],
+  ["Permission to Dance","BTS", "FxEorUpwkmg"],
+  ["Blessed-Cursed","ENHYPEN", "2x6mVjX7sgc"],
+  ["Let Me In (20 CUBE)","ENHYPEN", "KU3XvCcXn08"],
+  ["On The Ground","ROSÉ", "EvLfnrHaDm0"],
+  ["SOLO","JENNIE", "4y8Hxkzkhjs"],
+  ["TATTOO","AleXa", "hLDuksz7_bI"],
+  ["You Problem","MONSTA X", "TbSKd7oDZds"],
+  ["Psychic Lover","ITZY", "WKNHe60epck"]
 ];
 const mode = document.querySelector("#mode");
 const roundLabel = document.querySelector("#round");
 const heading = document.querySelector("#prompt");
-const choices = [...document.querySelectorAll("#choices button")];
+const choices = [...document.querySelectorAll("#choices .pick")];
 const replay = document.querySelector("#replay");
+const previews = [...document.querySelectorAll("#choices .preview")];
+const player = document.querySelector("#preview-player");
 let entrants, winners, match;
+const picks = new Set();
+
+function stopPreview() {
+  player.replaceChildren();
+  player.hidden = true;
+}
+
+function playPreview(title, videoId) {
+  stopPreview();
+  const iframe = document.createElement("iframe");
+  iframe.title = "YouTube preview of " + title;
+  iframe.allow = "autoplay; encrypted-media; picture-in-picture";
+  iframe.referrerPolicy = "strict-origin-when-cross-origin";
+  iframe.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&end=10";
+  player.append(iframe);
+  player.hidden = false;
+}
 
 function render() {
+  stopPreview();
+  picks.clear();
   if (entrants.length === 1) {
     const [title, artist] = entrants[0];
     roundLabel.textContent = "BRACKET COMPLETE";
@@ -109,10 +138,21 @@ function render() {
     replay.focus();
     return;
   }
-  const round = {32: "Round of 32", 16: "Round of 16", 8: "Quarterfinal", 4: "Semifinal", 2: "Final"};
-  roundLabel.textContent = round[entrants.length] + " · Match " + (match + 1) + " of " + entrants.length / 2;
+  const round = {32: "Round of 32", 16: "Round of 16", 8: "Semifinal", 4: "Final"};
+  roundLabel.textContent = round[entrants.length] + " · Match " + (match + 1) + " of " + entrants.length / 4;
+  heading.textContent = entrants.length === 4 ? "Pick your winner" : "Pick two songs to advance";
   choices.forEach((button, index) => {
-    const [title, artist] = entrants[match * 2 + index];
+    const [title, artist, videoId] = entrants[match * 4 + index];
+    button.setAttribute("aria-pressed", "false");
+    const preview = previews[index];
+    preview.hidden = !videoId;
+    preview.setAttribute("aria-label", "Play 10-second preview of " + title);
+    preview.onclick = videoId ? () => playPreview(title, videoId) : null;
+    const link = preview.nextElementSibling;
+    link.href = videoId
+      ? "https://music.youtube.com/watch?v=" + videoId
+      : "https://music.youtube.com/search?q=" + encodeURIComponent(title + " " + artist);
+    link.setAttribute("aria-label", "Open " + title + " on YouTube Music");
     button.querySelector("strong").textContent = title;
     button.querySelector("span").textContent = artist;
   });
@@ -127,7 +167,6 @@ function start() {
   entrants = entrants.slice(0, songs.length);
   winners = [];
   match = 0;
-  heading.textContent = "Which song are you keeping?";
   document.querySelector("#choices").hidden = false;
   replay.hidden = true;
   render();
@@ -135,9 +174,17 @@ function start() {
 
 choices.forEach((button, index) => {
   button.addEventListener("click", () => {
-    winners.push(entrants[match * 2 + index]);
+    if (picks.has(index)) {
+      picks.delete(index);
+      button.setAttribute("aria-pressed", "false");
+      return;
+    }
+    picks.add(index);
+    button.setAttribute("aria-pressed", "true");
+    if (picks.size < (entrants.length === 4 ? 1 : 2)) return;
+    winners.push(...[...picks].map(pick => entrants[match * 4 + pick]));
     match++;
-    if (match === entrants.length / 2) {
+    if (match === entrants.length / 4) {
       entrants = winners;
       winners = [];
       match = 0;
