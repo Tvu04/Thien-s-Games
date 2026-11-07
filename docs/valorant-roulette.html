@@ -44,8 +44,8 @@
     <div class="challenge-wheel" aria-hidden="true">
       <svg viewBox="0 0 200 200">
         <circle cx="100" cy="100" r="99" fill="#62293a"/>
-        <g stroke="#ff8996" stroke-width="2"><path d="M100 100V1" transform="rotate(22.5 100 100)"/><path d="M100 100V1" transform="rotate(67.5 100 100)"/><path d="M100 100V1" transform="rotate(112.5 100 100)"/><path d="M100 100V1" transform="rotate(157.5 100 100)"/><path d="M100 100V1" transform="rotate(202.5 100 100)"/><path d="M100 100V1" transform="rotate(247.5 100 100)"/><path d="M100 100V1" transform="rotate(292.5 100 100)"/><path d="M100 100V1" transform="rotate(337.5 100 100)"/></g>
-        <g fill="white" font-size="11" font-weight="700" text-anchor="middle" dominant-baseline="central"><text x="100.0" y="35.0">Women</text><text x="146.0" y="54.0">Men</text><text x="165.0" y="100.0">Blue</text><text x="146.0" y="146.0">Red</text><text x="100.0" y="165.0">Pink</text><text x="54.0" y="146.0">Default</text><text x="35.0" y="100.0">Duelists</text><text x="54.0" y="54.0">Sentinels</text></g>
+        <g stroke="#ff8996" stroke-width="2"><path d="M100 100V1" transform="rotate(18 100 100)"/><path d="M100 100V1" transform="rotate(54 100 100)"/><path d="M100 100V1" transform="rotate(90 100 100)"/><path d="M100 100V1" transform="rotate(126 100 100)"/><path d="M100 100V1" transform="rotate(162 100 100)"/><path d="M100 100V1" transform="rotate(198 100 100)"/><path d="M100 100V1" transform="rotate(234 100 100)"/><path d="M100 100V1" transform="rotate(270 100 100)"/><path d="M100 100V1" transform="rotate(306 100 100)"/><path d="M100 100V1" transform="rotate(342 100 100)"/></g>
+        <g fill="white" font-size="9" font-weight="700" text-anchor="middle" dominant-baseline="central"><text x="100.0" y="33.0">Women</text><text x="139.4" y="45.8">Men</text><text x="163.7" y="79.3">Blue</text><text x="163.7" y="120.7">Red</text><text x="139.4" y="154.2">Pink</text><text x="100.0" y="167.0">Default</text><text x="60.6" y="154.2">Duelists</text><text x="36.3" y="120.7">Sentinels</text><text x="36.3" y="79.3">Initiators</text><text x="60.6" y="45.8">Controllers</text></g>
         <circle cx="100" cy="100" r="9" fill="#ff8996"/>
       </svg>
     </div>
@@ -107,7 +107,7 @@ spin.addEventListener('click', async () => {
     role.disabled = false;
   }
 });
-const challenges = [["Female Agents Only","Everyone on your team picks a female agent."],["Male Agents Only","Everyone on your team picks a male agent."],["Blue Loadout","Use blue weapon skins for your main weapons."],["Red Loadout","Use red weapon skins for your main weapons."],["Pink Loadout","Use pink weapon skins for your main weapons."],["Default Loadout","Use default weapon skins for the match."],["All Duelists","Everyone on your team picks a Duelist."],["All Sentinels","Everyone on your team picks a Sentinel."]];
+const challenges = [["Female Agents Only","Everyone on your team picks a female agent."],["Male Agents Only","Everyone on your team picks a male agent."],["Blue Loadout","Use blue weapon skins for your main weapons."],["Red Loadout","Use red weapon skins for your main weapons."],["Pink Loadout","Use pink weapon skins for your main weapons."],["Default Loadout","Use default weapon skins for the match."],["All Duelists","Everyone on your team picks a Duelist."],["All Sentinels","Everyone on your team picks a Sentinel."],["All Initiators","Everyone on your team picks an Initiator."],["All Controllers","Everyone on your team picks a Controller."]];
 const challengeSpin = document.querySelector('#challenge-spin');
 const challengeResult = document.querySelector('#challenge-result');
 const wheel = document.querySelector('.challenge-wheel svg');
