@@ -174,6 +174,13 @@ function render() {
       link.href = page;
       link.textContent = 'View ' + title + ' page ↗';
       info.append(link);
+      if (page === 'valorant.html') {
+        const rouletteLink = document.createElement('a');
+        rouletteLink.className = 'button';
+        rouletteLink.href = 'valorant-roulette.html';
+        rouletteLink.textContent = 'Spin for an Agent ↗';
+        info.append(document.createElement('br'), rouletteLink);
+      }
     }
     card.append(art, info);
     catalog.append(card);
